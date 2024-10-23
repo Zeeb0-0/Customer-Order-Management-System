@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Order Management System</title>
+    <!-- Include PyScript -->
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/1bcdd94c61.js" crossorigin="anonymous"></script>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Customer Order Management</h1>
+
+        <!-- Stock List -->
+        <div class="stock-section">
+            <h2>Available Stock</h2>
+            <div id="stock-items">
+                <!-- Dynamically populated stock items will go here -->
+            </div>
+        </div>
+
+        <!-- Order List -->
+        <div class="order-section">
+            <h2>Your Orders</h2>
+            <div id="order-items">
+                <!-- Dynamically populated order items will go here -->
+            </div>
+        </div>
+
+        <!-- Confirm Order Button -->
+        <button class="btn confirm-btn" onclick="confirmOrder()">Confirm Order</button>
+
+        <!-- Receipt Section (Initially hidden) -->
+        <div id="receipt" class="receipt fade-in">
+            <h3>Receipt</h3>
+            <p id="receipt-content"></p>
+        </div>
+
+    </div>
+
+    <!-- External Script -->
+    <script src="script.js"></script>
+
+    <py-script>
+        from pyscript import Element
+        
+        def calculate_total(*args):
+            total = sum([float(quantity) * 10 for quantity in order.values()])  # Assuming each item is $10
+            Element("receipt-content").element.innerHTML += f"<br><br>Total Price: ${total}"
+        
+        Element("receipt").element.onclick = calculate_total
+    </py-script>
+    
+</body>
+</html>
